@@ -1,0 +1,25 @@
+server:
+  port: 9095
+
+eureka:
+   client:
+    service-url:
+      defaultZone: http://localhost:2022/eureka
+   instance:
+    prefer-ip-address: true
+    
+spring:
+  application:
+    name: UserGateway
+    
+  cloud:
+    gateway:
+      routes:
+      - id: order123
+        uri: lb://order-service
+        predicates:
+        - Path=/order/**
+      - id: order1234
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
